@@ -24,7 +24,7 @@ public class Exchange{
     //is Parent is null
   }
   public RoutingMapTree subtree(int i){
-    
+
   }
   //Any other I may need
   public MobilePhoneSet residentSet(){
