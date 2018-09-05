@@ -1,3 +1,4 @@
+package mobile;
 public class MobilePhone{
   public int phno;
   public Boolean status = false;
@@ -18,7 +19,6 @@ public class MobilePhone{
     status = false;
   }
   public Exchange location(){
-    //TO DO AFTER WRITING EXCHANGE CLASS
     if (status == true){
       return baseStation;
       //RETURN BASE STATION

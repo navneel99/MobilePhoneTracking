@@ -1,8 +1,15 @@
-import java.util.*;
+package mobile;
+//import java.util.*;
 public class Myset{
   public LinkedList<Object> Set;
   public Myset(){
     Set = new LinkedList<Object>();
+  }
+  public int length(){
+    return Set.size();
+  }
+  public Object atIndex(int i){
+    return Set.get(i);
   }
   public Boolean IsEmpty(){
     if (Set.size() == 0){
@@ -26,6 +33,7 @@ public class Myset{
     if (this.IsMember(o)){
       Set.remove(o);
     } else {
+      System.out.println("The element is not found.");
       //RAISE EXCEPTION ELEMENT NOT FOUND
     }
   }

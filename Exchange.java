@@ -1,8 +1,9 @@
+package mobile;
 public class Exchange{
   public int id;
   public Exchange parent; //Exchange id of parent
-  public MobilePhoneSet phoneset;
-  public ExchangeList children;
+  public MobilePhoneSet phoneset = new MobilePhoneSet();
+  public ExchangeList children = new ExchangeList();
   public Exchange(int number){
     id = number;
   }
@@ -17,15 +18,15 @@ public class Exchange{
   }
   public Boolean isRoot(){
     if (this.parent == null){
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
     //is Parent is null
   }
-  public RoutingMapTree subtree(int i){
+  /*public RoutingMapTree subtree(int i){
 
-  }
+  }*/
   //Any other I may need
   public MobilePhoneSet residentSet(){
     int lng = this.numChildren();
