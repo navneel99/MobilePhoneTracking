@@ -18,18 +18,42 @@ public class ExchangeList{  //For each individual node
       return false;
     }
   }
-  /*
+  public ExchangeList reverse(){
+    int len = this.length() -1 ;
+    ExchangeList rev = new ExchangeList();
+    while (len != -1){
+      rev.Insert(this.atIndex(len));
+      len--;
+    }
+    return rev;
+
+  }
+
+  public void remove(int index){
+    list.remove(index);
+  }
+  public void extend(ExchangeList el){
+    int len = el.length();
+    for ( int i = 0; i < len ; i++){
+       this.Insert(el.atIndex(i));
+    }
+  }
+
+
   //All exchanges here
   public static void main(String args[]){
     ExchangeList el = new ExchangeList();
     //System.out.println("ExchangeList working!");
 
     Exchange e = new Exchange(4);
-    el.Insert(e);
-    el.Insert(e);
+    Exchange f = new Exchange(5);
 
+    el.Insert(e);
+    el.Insert(f);
+    ExchangeList a= el.reverse();
+    System.out.println(el.atIndex(1).id + a.atIndex(0).id);
     System.out.println(el.IsMember(e));
     System.out.println(el.length());
   }
-  */
+
 }

@@ -34,9 +34,32 @@ public class RoutingMapTree{
 		}
 		return start;
 	}
-	//public ExchangeList routeCall(MobilePhone a, MobilePhone b){
-
-	//}
+	public ExchangeList routeCall(MobilePhone a, MobilePhone b){
+		Exchange start = a.baseStation;
+		Exchange end = b.baseStation;
+		Exchange topRouter = this.lowestRouter(start,end);
+		ExchangeList firstHalf = new ExchangeList();
+		firstHalf.Insert(start);
+		ExchangeList secondHalf = new ExchangeList();
+		secondHalf.Insert(end);
+		while (start != topRouter){
+			start = start.Parent();
+			firstHalf.Insert(start);
+		}
+		while (end != topRouter){
+			end = end.Parent();
+			secondHalf.Insert(end);
+		}
+		secondHalf.remove(secondHalf.length()-1);
+		secondHalf=secondHalf.reverse();
+		firstHalf.extend(secondHalf);
+		return firstHalf;
+	}
+	public void movePhone(MobilePhone a, Exchange b){
+		if (a.status && (b.numChildren() == 0)){
+			a.baseStation = b;
+		}
+	}
   public Boolean containsNode(Exchange a){
     if (tree.IsMember(a)){
       return true;
@@ -271,17 +294,27 @@ public class RoutingMapTree{
 		t.performAction("addExchange 1 4");
 		t.performAction("addExchange 1 5");
 		t.performAction("addExchange 4 6");
-		t.performAction("addExchange 4 7");
-		//t.performAction("switchOnMobile 987 4");
-		//t.performAction("switchOnMobile 986 4");
-		//t.performAction("switchOnMobile 985 4");
+		t.performAction("addExchange 2 7");
+		t.performAction("switchOnMobile 987 6");
+		t.performAction("switchOnMobile 986 6");
+		t.performAction("switchOnMobile 985 3");
 		t.performAction("queryMobilePhoneSet 1");
-		Object a = t.tree.atIndex(6);
-		Object b = t.tree.atIndex(7);
+		Object a = t.tree.atIndex(3);
+		Object b = t.tree.atIndex(6);
 		Exchange a1 = (Exchange) a;
 		Exchange b1 = (Exchange) b;
-		Exchange res =t.lowestRouter(a1,b1);
-		System.out.println(res.id);
+		MobilePhoneSet mps1 = a1.residentSet();
+		MobilePhoneSet mps2 = b1.residentSet();
+		MobilePhone m1 = mps1.getPhoneByIndex(0);
+		MobilePhone m2 = mps2.getPhoneByIndex(0);
+		//Exchange res =t.lowestRouter(a1,b1);
+		ExchangeList el = t.routeCall(m1,m2);
+		//System.out.println(el.length());
+		int lngth = el.length();
+		//System.out.println(lngth);
+		for (int i = 0; i < lngth ; i++){
+			System.out.println(el.atIndex(i).id);
+		}
 
 	}
   /*public String performAction(String actionMessage){
