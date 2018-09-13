@@ -1,5 +1,5 @@
 package mobile;
-//import java.util.*;
+import java.util.*;
 public class Myset{
   public LinkedList<Object> Set;
   public Myset(){
@@ -29,12 +29,19 @@ public class Myset{
   public void Insert(Object o){
     Set.add(o);
   }
+  void a() throws NullPointerException{
+    throw new NullPointerException("lolol");
+  }
+
   public void Delete(Object o){
-    if (this.IsMember(o)){
+    try{
+      if (this.IsMember(o)){
       Set.remove(o);
     } else {
-      System.out.println("The element is not found.");
-      //RAISE EXCEPTION ELEMENT NOT FOUND
+      a();
+    }
+    } catch(Exception e){
+      System.out.println("This element did not exist in the list to begin with.");
     }
   }
   public Myset Union(Myset a){
@@ -71,7 +78,7 @@ public class Myset{
     }
     return c;
   }
-  /*
+
   public static void main(String[] args){
     System.out.println("Ok");
     Myset a = new Myset();
@@ -85,8 +92,10 @@ public class Myset{
     Myset c = a.Intersection(b);
     System.out.println(c.IsMember(5));
     System.out.println(c.IsMember(2));
-    System.out.println(c);
+    //System.out.println(c);
+      a.Delete(5);
+    System.out.println(a.IsMember(7));
 
   }
-  */
+
 }

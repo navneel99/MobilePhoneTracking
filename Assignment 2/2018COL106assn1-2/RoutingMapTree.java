@@ -19,6 +19,24 @@ public class RoutingMapTree{
   }
   }
 
+	public Exchange findPhone(MobilePhone m){
+		return m.baseStation;
+	}
+
+	public Exchange lowestRouter(Exchange a, Exchange b){
+		Exchange start = a;
+		while (start.Parent() != null){
+			if (start.containsExchange(b)){
+				return start;
+			} else{
+				start = start.Parent();
+			}
+		}
+		return start;
+	}
+	//public ExchangeList routeCall(MobilePhone a, MobilePhone b){
+
+	//}
   public Boolean containsNode(Exchange a){
     if (tree.IsMember(a)){
       return true;
@@ -244,7 +262,28 @@ public class RoutingMapTree{
     }
     //System.out.println(actionMessage);
   }
+	public static void main(String[] args){
+		System.out.println("RoutingMapTree working!");
+		RoutingMapTree t = new RoutingMapTree();
+		t.performAction("addExchange 0 1");
+		t.performAction("addExchange 0 2");
+		t.performAction("addExchange 1 3");
+		t.performAction("addExchange 1 4");
+		t.performAction("addExchange 1 5");
+		t.performAction("addExchange 4 6");
+		t.performAction("addExchange 4 7");
+		//t.performAction("switchOnMobile 987 4");
+		//t.performAction("switchOnMobile 986 4");
+		//t.performAction("switchOnMobile 985 4");
+		t.performAction("queryMobilePhoneSet 1");
+		Object a = t.tree.atIndex(6);
+		Object b = t.tree.atIndex(7);
+		Exchange a1 = (Exchange) a;
+		Exchange b1 = (Exchange) b;
+		Exchange res =t.lowestRouter(a1,b1);
+		System.out.println(res.id);
 
+	}
   /*public String performAction(String actionMessage){
     String[] words = actionMessage.split(" ");
     String answer = "";

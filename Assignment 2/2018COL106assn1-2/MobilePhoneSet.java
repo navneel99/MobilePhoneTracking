@@ -35,6 +35,11 @@ public class MobilePhoneSet{
 	}
 	public void remove(MobilePhone mob){
 		//int number  = mob.phno;
+		/*try{
+			S.Delete(mob);
+		} catch (Exception e){
+			System.out.println("MobilePhoneSet");
+		}*/
 		 S.Delete(mob);
 	}
 	/*public static void main(String args[]){
