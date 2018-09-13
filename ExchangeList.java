@@ -18,11 +18,12 @@ public class ExchangeList{  //For each individual node
       return false;
     }
   }
+  /*
   //All exchanges here
   public static void main(String args[]){
     ExchangeList el = new ExchangeList();
-    System.out.println("ExchangeList working!");
-    
+    //System.out.println("ExchangeList working!");
+
     Exchange e = new Exchange(4);
     el.Insert(e);
     el.Insert(e);
@@ -30,5 +31,5 @@ public class ExchangeList{  //For each individual node
     System.out.println(el.IsMember(e));
     System.out.println(el.length());
   }
-
+  */
 }
