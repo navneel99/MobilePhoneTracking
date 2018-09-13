@@ -276,7 +276,46 @@ public class RoutingMapTree{
       System.out.print("\n");
       //Print Identifiers of all the mobilephones in the set
     }
-    } else {
+	} else if(words[0].equals("queryFindPhone")){
+		String a = words[1];
+		int a1 = Integer.parseInt(a);
+		MobilePhone m1 = root.residentSet().getPhone(a1);
+		System.out.println(this.findPhone(m1).id);
+	}	else if(words[0].equals("queryLowestRouter")){
+		String a = words[1];
+		String b = words[2];
+		int a1 = Integer.parseInt(a);
+		int b1 = Integer.parseInt(b);
+		Exchange aa = this.getNode(a1);
+		Exchange bb = this.getNode(b1);
+
+		System.out.println(this.lowestRouter(aa,bb).id);
+
+	}	else if(words[0].equals("queryFindCallPath")){
+		String a = words[1];
+		String b = words[2];
+		int a1 = Integer.parseInt(a);
+		int b1 = Integer.parseInt(b);
+		MobilePhone m1 = root.residentSet().getPhone(a1);
+		MobilePhone m2 = root.residentSet().getPhone(b1);
+		ExchangeList allNodes = routeCall(m1,m2);
+		int l = allNodes.length();
+		for (int i = 0; i < l; i++){
+			System.out.print(allNodes.atIndex(i).id);
+			if (i != l-1){
+			System.out.print(", ");
+			}
+		}
+		System.out.print("\n");
+	} else if(words[0].equals("movePhone")){
+		String a = words[1];
+		String b = words[2];
+		int a1 = Integer.parseInt(a);
+		int b1 = Integer.parseInt(b);
+		MobilePhone m1 = root.residentSet().getPhone(a1);
+		Exchange bb = this.getNode(b1);
+		movePhone(m1,bb);
+	}	else {
       try{
         a();
       } catch(Exception e){
@@ -285,7 +324,7 @@ public class RoutingMapTree{
     }
     //System.out.println(actionMessage);
   }
-	public static void main(String[] args){
+/*	public static void main(String[] args){
 		System.out.println("RoutingMapTree working!");
 		RoutingMapTree t = new RoutingMapTree();
 		t.performAction("addExchange 0 1");
@@ -315,8 +354,14 @@ public class RoutingMapTree{
 		for (int i = 0; i < lngth ; i++){
 			System.out.println(el.atIndex(i).id);
 		}
+		System.out.println("Checking new functions:");
+		t.performAction("queryFindPhone 987");
+		t.performAction("queryLowestRouter 6 1");
+		t.performAction("queryFindCallPath 987 985");
 
 	}
+*/
+
   /*public String performAction(String actionMessage){
     String[] words = actionMessage.split(" ");
     String answer = "";
