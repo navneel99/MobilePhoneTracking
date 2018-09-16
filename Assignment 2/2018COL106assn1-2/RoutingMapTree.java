@@ -20,7 +20,12 @@ public class RoutingMapTree{
   }
 
 	public Exchange findPhone(MobilePhone m){
+		try{
 		return m.baseStation;
+	} catch(Exception e){
+		System.out.println("No such Phone!");
+		return null;
+	}
 	}
 
 	public Exchange lowestRouter(Exchange a, Exchange b){
@@ -277,11 +282,17 @@ public class RoutingMapTree{
       //Print Identifiers of all the mobilephones in the set
     }
 	} else if(words[0].equals("queryFindPhone")){
-		String a = words[1];
+    System.out.print(actionMessage+": ");
+    String a = words[1];
 		int a1 = Integer.parseInt(a);
 		MobilePhone m1 = root.residentSet().getPhone(a1);
+		if (m1 != null){
 		System.out.println(this.findPhone(m1).id);
+  } else{
+    System.out.println("Error - No mobile phone with identifier "+a+" found in the network");
+  }
 	}	else if(words[0].equals("queryLowestRouter")){
+		System.out.print(actionMessage+": ");
 		String a = words[1];
 		String b = words[2];
 		int a1 = Integer.parseInt(a);
@@ -292,21 +303,33 @@ public class RoutingMapTree{
 		System.out.println(this.lowestRouter(aa,bb).id);
 
 	}	else if(words[0].equals("queryFindCallPath")){
+		System.out.print(actionMessage+": ");
 		String a = words[1];
 		String b = words[2];
 		int a1 = Integer.parseInt(a);
 		int b1 = Integer.parseInt(b);
 		MobilePhone m1 = root.residentSet().getPhone(a1);
 		MobilePhone m2 = root.residentSet().getPhone(b1);
+    boolean status1 = m1.status;
+    boolean status2 = m2.status;
+    if (status1){
+      if (status2){
 		ExchangeList allNodes = routeCall(m1,m2);
 		int l = allNodes.length();
 		for (int i = 0; i < l; i++){
 			System.out.print(allNodes.atIndex(i).id);
 			if (i != l-1){
 			System.out.print(", ");
-			}
-		}
-		System.out.print("\n");
+      }
+    }
+    		System.out.print("\n");
+  } else {
+    System.out.println("Error - Mobile phone with identifier "+b+" is currently switched off");
+  }
+		} else {
+      System.out.println("Error - Mobile phone with identifier "+a+" is currently switched off");
+    }
+
 	} else if(words[0].equals("movePhone")){
 		String a = words[1];
 		String b = words[2];
